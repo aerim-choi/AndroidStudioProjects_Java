@@ -6,22 +6,31 @@ public class CardReader {
     Card card; //사용자 카드
     int totalAmount;    //결제금액
 
+    String msg;
 
     public CardReader(Card card, int totalAmount) {
         this.card = card;
         this.totalAmount = totalAmount;
     }
 
-    String readCard(){
+    boolean readCard(){
         boolean isCardValid= validCard(this.card.getCardNumber());
         boolean isCashLeft = cashLeft(this.card.getCardMoney());
-        if(!isCardValid) {return "유효하지 않은 카드";}
-        if(!isCashLeft){return "카드 잔액 부족";}
+        if(!isCardValid) {
+            this.msg="유효하지 않은 카드입니다.";
+            return false;
+        }
+        if(!isCashLeft){
+            this.msg="카드 잔액이 부족합니다.";
+            return false;
+        }
         if(isCardValid && isCashLeft){
             payment(this.card);
-            return "결제 성공";
+            this.msg="결제 완료";
+            return true;
         }
-        return "결제 실패";
+        this.msg="카드 리더기 오류";
+        return false;
     }
 
     boolean validCard(int cardNumber){//카드 번호가 유효한지 확인
@@ -43,6 +52,7 @@ public class CardReader {
         card.setCardMoney(cardMoney-totalAmount);
     }
 
-
-
+    public String getMsg() {
+        return msg;
+    }
 }

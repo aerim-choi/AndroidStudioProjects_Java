@@ -12,6 +12,7 @@ public class Payment {
     String paymentType;
     int totalAmount;
     boolean isTakeout;
+    String msg;
 
     public Payment(Coupon coupon, int totalAmount, boolean isTakeout) {
         this.orderNumber++;
@@ -29,23 +30,30 @@ public class Payment {
     }
 
 
-    public String pay(){
-        String isPay="";
+    public boolean pay(){
+        boolean isPay;
+
         if(this.paymentType.equals("쿠폰")) { //쿠폰 결제
             Log.d("paymentType", this.paymentType);
             CouponReader couponReader=new CouponReader(coupon,totalAmount);
             isPay = couponReader.readCoupon();
+            this.msg=couponReader.getMsg();
             return isPay;
 
         }else{ //카드 결제
             Log.d("paymentType", this.paymentType);
             CardReader cardReader=new CardReader(card,totalAmount);
             isPay = cardReader.readCard();
+            this.msg=cardReader.getMsg();
             return isPay;
         }
     }
-
-    public String payfinish(){
-        ReceiptPrinter receiptPrinter=new ReceiptPrinter(totalAmount,orderList,orderNumber)
+    public String displayPrompt(){
+        return this.msg;
     }
+
+//    public String payfinish(){
+//        ReceiptPrinter receiptPrinter=new ReceiptPrinter(totalAmount,orderList,orderNumber)
+//    }
 }
+

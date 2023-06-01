@@ -11,11 +11,6 @@ public class Side implements Menu{
         this.price = price;
     }
 
-    @Override
-    public void showMenu() {
-
-    }
-
     public String getMenuName() {
         return name;
     }

@@ -31,18 +31,18 @@ public class CouponPaymentActivity extends AppCompatActivity {
                 Coupon coupon = new Coupon(12345678, 30000);
                 Payment couponPay = new Payment(coupon, totalPrice, isTakeout);
 
-                String isPay = couponPay.pay(); //쿠폰 결제
-                Log.d("isPay", isPay);
+                boolean isPay = couponPay.pay(); //쿠폰 결제
+
                 TextView paymentResultText = findViewById(R.id.payment_result_text);
-                if (isPay.equals("결제 성공")) {
-                    paymentResultText.setText("결제가 완료되었습니다.");
+                if (isPay) {
+                    paymentResultText.setText(couponPay.displayPrompt());
                     Intent intent= new Intent(CouponPaymentActivity.this,OrderFinishActivity.class);
                     intent.putExtra("orderNumber",Payment.orderNumber);
 
                     startActivity(intent);
 
                 } else {
-                    paymentResultText.setText("결제에 실패하였습니다.");
+                    paymentResultText.setText(couponPay.displayPrompt());
                 }
             }
         });

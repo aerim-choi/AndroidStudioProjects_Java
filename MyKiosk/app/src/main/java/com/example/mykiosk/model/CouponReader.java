@@ -5,22 +5,31 @@ import android.util.Log;
 public class CouponReader {
     Coupon coupon; //쿠폰
     int totalAmount;//결제금액
-
+    String msg;
     public CouponReader(Coupon coupon, int totalAmount) {
         this.coupon=coupon;
         this.totalAmount=totalAmount;
     }
 
-    String readCoupon(){
+    boolean readCoupon(){
         boolean isCouponValid= validCoupon(this.coupon.getBarcode());
         boolean isCashLeft = cashLeft(this.coupon.getCouponMoney());
-        if(!isCouponValid) {return "유효하지 않은 쿠폰";}
-        if(!isCashLeft){return "쿠폰 잔액 부족";}
+        if(!isCouponValid) {
+            this.msg="유효하지 않은 쿠폰입니다.";
+            return false;
+        }
+        if(!isCashLeft){
+            this.msg="쿠폰 잔액이 부족합니다.";
+            return false;
+        }
         if(isCouponValid && isCashLeft){
             payment(this.coupon);
-            return "결제 성공";
+            this.msg="결제 완료";
+            return true;
+
         }
-        return "쿠폰 사용 실패";
+        this.msg="쿠폰 리더기 오류";
+        return false;
     }
 
     boolean validCoupon(int barcode){//바코드 읽기
@@ -40,6 +49,9 @@ public class CouponReader {
     void payment(Coupon coupon){ //쿠폰 사용
         int couponMoney=coupon.getCouponMoney();
         coupon.setCouponMoney(couponMoney-totalAmount);
+    }
+    public String getMsg() {
+        return msg;
     }
 }
 

@@ -31,18 +31,18 @@ public class CardPaymentActivity extends AppCompatActivity {
                 Card card= new Card(12345678,30000); //사용자의 카드 임의로 설정
                 Payment cardPay = new Payment(card, totalPrice, isTakeout);
                 // 아니요를 선택한 경우에 대한 처리
-                String isPay = cardPay.pay(); //카드 결제
-                Log.d("isPay", isPay);
+                boolean isPay = cardPay.pay(); //카드 결제
+
 
                 TextView paymentResultText = findViewById(R.id.payment_result_text);
-                if (isPay.equals("결제 성공")) {
-                    paymentResultText.setText("결제가 완료되었습니다.");
+                if (isPay) {
+                    paymentResultText.setText(cardPay.displayPrompt());
                     Intent intent= new Intent(CardPaymentActivity.this,OrderFinishActivity.class);
                     intent.putExtra("orderNumber",Payment.orderNumber);
                     startActivity(intent);
 
                 } else {
-                    paymentResultText.setText("결제에 실패하였습니다.");
+                    paymentResultText.setText(cardPay.displayPrompt());
                 }
             }
         });
