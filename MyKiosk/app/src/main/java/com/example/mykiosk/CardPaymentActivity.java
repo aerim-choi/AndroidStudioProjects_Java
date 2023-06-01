@@ -10,7 +10,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mykiosk.model.Card;
+import com.example.mykiosk.model.Order;
 import com.example.mykiosk.model.Payment;
+
+import java.util.ArrayList;
 
 public class CardPaymentActivity extends AppCompatActivity {
     Button inputCardBtn;
@@ -22,6 +25,9 @@ public class CardPaymentActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int totalPrice = intent.getIntExtra("totalPrice", 0);
         boolean isTakeout=intent.getBooleanExtra("isTakeout",false);
+        Bundle receivedBundle = intent.getExtras();
+        ArrayList<Order> orderList = (ArrayList<Order>) receivedBundle.getSerializable("orderList");
+
         inputCardBtn=(Button)findViewById(R.id.input_card_btn);
 
 
@@ -39,6 +45,9 @@ public class CardPaymentActivity extends AppCompatActivity {
                     paymentResultText.setText(cardPay.displayPrompt());
                     Intent intent= new Intent(CardPaymentActivity.this,OrderFinishActivity.class);
                     intent.putExtra("orderNumber",Payment.orderNumber);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("orderList", orderList);
+                    intent.putExtras(bundle);
                     startActivity(intent);
 
                 } else {

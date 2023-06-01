@@ -10,7 +10,10 @@ package com.example.mykiosk;
         import androidx.appcompat.app.AppCompatActivity;
 
         import com.example.mykiosk.model.Coupon;
+        import com.example.mykiosk.model.Order;
         import com.example.mykiosk.model.Payment;
+
+        import java.util.ArrayList;
 
 public class CouponPaymentActivity extends AppCompatActivity {
     Button inputCouponBtn;
@@ -22,6 +25,9 @@ public class CouponPaymentActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int totalPrice = intent.getIntExtra("totalPrice", 0);
         boolean isTakeout=intent.getBooleanExtra("isTakeout",false);
+        Bundle receivedBundle = intent.getExtras();
+        ArrayList<Order> orderList = (ArrayList<Order>) receivedBundle.getSerializable("orderList");
+
         inputCouponBtn=(Button)findViewById(R.id.input_coupon_btn);
 
 
@@ -38,7 +44,9 @@ public class CouponPaymentActivity extends AppCompatActivity {
                     paymentResultText.setText(couponPay.displayPrompt());
                     Intent intent= new Intent(CouponPaymentActivity.this,OrderFinishActivity.class);
                     intent.putExtra("orderNumber",Payment.orderNumber);
-
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("orderList", orderList);
+                    intent.putExtras(bundle);
                     startActivity(intent);
 
                 } else {

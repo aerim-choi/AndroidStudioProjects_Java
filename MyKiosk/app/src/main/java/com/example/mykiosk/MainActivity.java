@@ -84,7 +84,9 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         boolean isTakeout = true;
                         Intent intent= new Intent(MainActivity.this,CardPaymentActivity.class);
-                        intent.putExtra("orderList",orderList);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("orderList", orderList);
+                        intent.putExtras(bundle);
                         intent.putExtra("totalPrice",Integer.parseInt(Order.getTotalPrice(orderList)));
                         intent.putExtra("isTakeout",isTakeout);
 
@@ -98,7 +100,9 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         boolean isTakeout = false;
                         Intent intent= new Intent(MainActivity.this,CardPaymentActivity.class);
-
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("orderList", orderList);
+                        intent.putExtras(bundle);
                         intent.putExtra("totalPrice",Integer.parseInt(Order.getTotalPrice(orderList)));
                         intent.putExtra("isTakeout",isTakeout);
                         startActivity(intent);
@@ -123,7 +127,9 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         boolean isTakeout = true;
                         Intent intent= new Intent(MainActivity.this,CouponPaymentActivity.class);
-
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("orderList", orderList);
+                        intent.putExtras(bundle);
                         intent.putExtra("totalPrice",Integer.parseInt(Order.getTotalPrice(orderList)));
                         intent.putExtra("isTakeout",isTakeout);
 
@@ -137,7 +143,9 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         boolean isTakeout = false;
                         Intent intent= new Intent(MainActivity.this,CouponPaymentActivity.class);
-
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("orderList", orderList);
+                        intent.putExtras(bundle);
                         intent.putExtra("totalPrice",Integer.parseInt(Order.getTotalPrice(orderList)));
                         intent.putExtra("isTakeout",isTakeout);
 
