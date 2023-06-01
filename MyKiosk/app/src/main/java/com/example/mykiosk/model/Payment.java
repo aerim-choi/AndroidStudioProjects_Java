@@ -2,6 +2,8 @@ package com.example.mykiosk.model;
 
 import android.util.Log;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 public class Payment {
 
     public static int orderNumber=0;
@@ -30,7 +32,10 @@ public class Payment {
     public String pay(){
         String isPay="";
         if(this.paymentType.equals("쿠폰")) { //쿠폰 결제
-            return "쿠폰";
+            Log.d("paymentType", this.paymentType);
+            CouponReader couponReader=new CouponReader(coupon,totalAmount);
+            isPay = couponReader.readCoupon();
+            return isPay;
 
         }else{ //카드 결제
             Log.d("paymentType", this.paymentType);
@@ -38,5 +43,9 @@ public class Payment {
             isPay = cardReader.readCard();
             return isPay;
         }
+    }
+
+    public String payfinish(){
+        ReceiptPrinter receiptPrinter=new ReceiptPrinter(totalAmount,orderList,orderNumber)
     }
 }

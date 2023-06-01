@@ -2,17 +2,14 @@ package com.example.mykiosk;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mykiosk.model.Card;
-import com.example.mykiosk.model.Order;
 import com.example.mykiosk.model.Payment;
 
 public class CardPaymentActivity extends AppCompatActivity {

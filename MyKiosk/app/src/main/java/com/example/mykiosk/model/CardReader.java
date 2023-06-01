@@ -16,7 +16,7 @@ public class CardReader {
         boolean isCardValid= validCard(this.card.getCardNumber());
         boolean isCashLeft = cashLeft(this.card.getCardMoney());
         if(!isCardValid) {return "유효하지 않은 카드";}
-        if(!isCashLeft){return "잔액이 없음";}
+        if(!isCashLeft){return "카드 잔액 부족";}
         if(isCardValid && isCashLeft){
             payment(this.card);
             return "결제 성공";

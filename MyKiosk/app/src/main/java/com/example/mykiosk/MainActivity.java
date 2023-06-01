@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         boolean isTakeout = true;
                         Intent intent= new Intent(MainActivity.this,CardPaymentActivity.class);
-
+                        intent.putExtra("orderList",orderList);
                         intent.putExtra("totalPrice",Integer.parseInt(Order.getTotalPrice(orderList)));
                         intent.putExtra("isTakeout",isTakeout);
 
@@ -122,11 +122,12 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         boolean isTakeout = true;
+                        Intent intent= new Intent(MainActivity.this,CouponPaymentActivity.class);
 
-                        Coupon coupon = new Coupon();
-                        Payment couponPay = new Payment(coupon, Integer.parseInt(Order.getTotalPrice(orderList)), isTakeout);
-                        // 예를 선택한 경우에 대한 처리
-                        couponPay.pay(); //쿠폰 결제
+                        intent.putExtra("totalPrice",Integer.parseInt(Order.getTotalPrice(orderList)));
+                        intent.putExtra("isTakeout",isTakeout);
+
+                        startActivity(intent);
 
                     }
                 });
@@ -135,11 +136,12 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         boolean isTakeout = false;
+                        Intent intent= new Intent(MainActivity.this,CouponPaymentActivity.class);
 
-                        Coupon coupon = new Coupon();
-                        Payment couponPay = new Payment(coupon, Integer.parseInt(Order.getTotalPrice(orderList)), isTakeout);
-                        // 예를 선택한 경우에 대한 처리
-                        couponPay.pay(); //쿠폰 결제
+                        intent.putExtra("totalPrice",Integer.parseInt(Order.getTotalPrice(orderList)));
+                        intent.putExtra("isTakeout",isTakeout);
+
+                        startActivity(intent);
                     }
                 });
 
