@@ -35,10 +35,10 @@ public class Fragment2 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment2,container,false);
         recyclerView=(RecyclerView) rootView.findViewById(R.id.recyclerview);
-        BeverageList.add(new Beverage("콜라M",R.drawable.coke,"1500"));
-        BeverageList.add(new Beverage("콜라L",R.drawable.coke,"1500"));
-        BeverageList.add(new Beverage("사이다M",R.drawable.coke,"2000"));
-        BeverageList.add(new Beverage("사이다L",R.drawable.coke,"2000"));
+        BeverageList.add(new Beverage("콜라M",R.drawable.coke,"2900"));
+        BeverageList.add(new Beverage("콜라L",R.drawable.coke,"3100"));
+        BeverageList.add(new Beverage("사이다M",R.drawable.soda,"2900"));
+        BeverageList.add(new Beverage("사이다L",R.drawable.soda,"3100"));
         recyclerView.setHasFixedSize(true);
 
         adapter=new MyAdapter(getActivity(),BeverageList,new MyAdapter.OnItemClickListener(){

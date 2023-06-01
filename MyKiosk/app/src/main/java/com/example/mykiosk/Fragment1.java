@@ -41,10 +41,10 @@ public class Fragment1 extends Fragment {
 
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment1,container,false);
         recyclerView=(RecyclerView) rootView.findViewById(R.id.recyclerview);
-        burgerList.add(new Burger("햄버거1",R.drawable.hamburger1,"10000"));
-        burgerList.add(new Burger("햄버거2",R.drawable.hamburger1,"11000"));
-        burgerList.add(new Burger("햄버거3",R.drawable.hamburger1,"12000"));
-        burgerList.add(new Burger("햄버거4",R.drawable.hamburger1,"13000"));
+        burgerList.add(new Burger("와퍼",R.drawable.hamburger1,"8000"));
+        burgerList.add(new Burger("콰트로치즈와퍼",R.drawable.hamburger2,"8800"));
+        burgerList.add(new Burger("불고기와퍼",R.drawable.hamburger3,"8000"));
+        burgerList.add(new Burger("기네스와퍼",R.drawable.hamburger4,"10200"));
         recyclerView.setHasFixedSize(true);
 
         adapter=new MyAdapter(getActivity(),burgerList,new MyAdapter.OnItemClickListener(){
