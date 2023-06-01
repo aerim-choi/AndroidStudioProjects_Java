@@ -38,10 +38,10 @@ public class Fragment4 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment4,container,false);
         recyclerView=(RecyclerView) rootView.findViewById(R.id.recyclerview);
-        TimeSaleList.add(new TimeSale("와퍼주니어(행사)",R.drawable.hamburger1,"1900"));
-        TimeSaleList.add(new TimeSale("불고기와퍼주니어(행사)",R.drawable.hamburger1,"1900"));
-        TimeSaleList.add(new TimeSale("치즈와퍼주니어(행사)",R.drawable.hamburger1,"2200"));
-        TimeSaleList.add(new TimeSale("할라피뇨와퍼주니어(행사)",R.drawable.hamburger1,"2300"));
+        TimeSaleList.add(new TimeSale("와퍼주니어(행사)",R.drawable.hamburger5,"2800"));
+        TimeSaleList.add(new TimeSale("불고기와퍼주니어(행사)",R.drawable.hamburger6,"2800"));
+        TimeSaleList.add(new TimeSale("치즈와퍼주니어(행사)",R.drawable.hamburger7,"2950"));
+        TimeSaleList.add(new TimeSale("통새우와퍼주니어(행사)",R.drawable.hamburger8,"3100"));
         recyclerView.setHasFixedSize(true);
 
         adapter=new MyAdapter(getActivity(),TimeSaleList,new MyAdapter.OnItemClickListener(){

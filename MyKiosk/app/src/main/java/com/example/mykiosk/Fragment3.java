@@ -37,10 +37,10 @@ public class Fragment3 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment3,container,false);
         recyclerView=(RecyclerView) rootView.findViewById(R.id.recyclerview);
-        SideList.add(new Side("감자튀김M",R.drawable.potato,"1500"));
-        SideList.add(new Side("감자튀김L",R.drawable.potato,"2000"));
-        SideList.add(new Side("치즈스틱",R.drawable.potato,"2000"));
-        SideList.add(new Side("양념감자",R.drawable.potato,"2300"));
+        SideList.add(new Side("감자튀김M",R.drawable.potato,"3000"));
+        SideList.add(new Side("감자튀김L",R.drawable.potato,"3500"));
+        SideList.add(new Side("치즈스틱",R.drawable.cheesestick,"3400"));
+        SideList.add(new Side("어니언링",R.drawable.onionring,"3300"));
         recyclerView.setHasFixedSize(true);
 
         adapter=new MyAdapter(getActivity(),SideList,new MyAdapter.OnItemClickListener(){
