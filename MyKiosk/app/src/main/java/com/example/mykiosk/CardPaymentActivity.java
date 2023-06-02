@@ -35,14 +35,14 @@ public class CardPaymentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Card card= new Card(12345678,30000); //사용자의 카드 임의로 설정
-                Payment cardPay = new Payment(card, totalPrice, isTakeout);
+                Payment payment = new Payment(card, totalPrice, isTakeout);
                 // 아니요를 선택한 경우에 대한 처리
-                boolean isPay = cardPay.pay(); //카드 결제
+                boolean isPay = payment.pay(totalPrice); //카드 결제
 
 
                 TextView paymentResultText = findViewById(R.id.payment_result_text);
                 if (isPay) {
-                    paymentResultText.setText(cardPay.displayPrompt());
+                    paymentResultText.setText(payment.displayPrompt());
                     Intent intent= new Intent(CardPaymentActivity.this,OrderFinishActivity.class);
                     intent.putExtra("orderNumber",Payment.orderNumber);
                     Bundle bundle = new Bundle();
@@ -51,7 +51,7 @@ public class CardPaymentActivity extends AppCompatActivity {
                     startActivity(intent);
 
                 } else {
-                    paymentResultText.setText(cardPay.displayPrompt());
+                    paymentResultText.setText(payment.displayPrompt());
                 }
             }
         });

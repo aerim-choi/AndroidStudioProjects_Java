@@ -4,13 +4,13 @@ import android.util.Log;
 
 public class CardReader {
     Card card; //사용자 카드
-    int totalAmount;    //결제금액
+    int payAmount;    //결제금액
 
     String msg;
 
-    public CardReader(Card card, int totalAmount) {
+    public CardReader(Card card, int payAmount) {
         this.card = card;
-        this.totalAmount = totalAmount;
+        this.payAmount = payAmount;
     }
 
     boolean readCard(){
@@ -40,16 +40,16 @@ public class CardReader {
         else return true;
     }
     boolean cashLeft(int cardMoney){ //카드에 잔액이 주문 금액보다 큰지 확인
-        if(this.totalAmount<=cardMoney){
+        if(this.payAmount<=cardMoney){
             return true;
         }else{
             return false;
         }
     }
 
-    void payment(Card card){ //카드 결제
+    public void payment(Card card){ //카드 결제
         int cardMoney=card.getCardMoney();
-        card.setCardMoney(cardMoney-totalAmount);
+        card.setCardMoney(cardMoney-payAmount);
     }
 
     public String getMsg() {

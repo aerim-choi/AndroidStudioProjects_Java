@@ -4,6 +4,7 @@ public class Card {
     int cardNumber;
     int cardMoney;
 
+
     public Card(int cardNumber, int cardMoney) {
         this.cardNumber = cardNumber;
         this.cardMoney = cardMoney;

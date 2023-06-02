@@ -28,7 +28,8 @@ public class Fragment2 extends Fragment {
     private RecyclerView recyclerView;
     private MyAdapter adapter;
     ArrayList<Beverage> BeverageList = new ArrayList<>();
-
+    // OrderViewModel 인스턴스 변수 선언
+    private OrderViewModel orderViewModel;
 
     @Nullable
     @Override
@@ -48,11 +49,16 @@ public class Fragment2 extends Fragment {
             }
         });
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);  // OrderViewModel 인스턴스를 MainActivity로부터 받아옴
+        orderViewModel = ((MainActivity) getActivity()).getOrderViewModel();
 
 
         return rootView;
     }
+    public void setOrderViewModel(OrderViewModel orderViewModel) {
+        this.orderViewModel = orderViewModel;
+    }
+
     private void showQuantityDialog(final Menu menu) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("메뉴 추가");
@@ -90,7 +96,7 @@ public class Fragment2 extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 // 주문목록에 새로운 메뉴 추가
                 Order orderMenu = new Order(quantity[0], menu.getMenuName(), menu.getMenuPrice());
-                ((MainActivity) getActivity()).addOrder(orderMenu);
+                orderViewModel.addOrder(orderMenu);
             }
         });
 

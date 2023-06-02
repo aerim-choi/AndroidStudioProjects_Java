@@ -30,20 +30,26 @@ public class Payment {
     }
 
 
-    public boolean pay(){
+    public boolean pay(int payAmount){
         boolean isPay;
 
         if(this.paymentType.equals("쿠폰")) { //쿠폰 결제
             Log.d("paymentType", this.paymentType);
-            CouponReader couponReader=new CouponReader(coupon,totalAmount);
+
+            CouponReader couponReader=new CouponReader(coupon,payAmount);
             isPay = couponReader.readCoupon();
+            if(isPay) {
+                this.totalAmount = totalAmount - payAmount;
+            }
             this.msg=couponReader.getMsg();
             return isPay;
-
         }else{ //카드 결제
             Log.d("paymentType", this.paymentType);
-            CardReader cardReader=new CardReader(card,totalAmount);
+            CardReader cardReader=new CardReader(card,payAmount);
             isPay = cardReader.readCard();
+            if(isPay){
+                this.totalAmount=totalAmount-payAmount;
+            }
             this.msg=cardReader.getMsg();
             return isPay;
         }
@@ -52,6 +58,9 @@ public class Payment {
         return this.msg;
     }
 
+    public int getTotalAmount() {
+        return totalAmount;
+    }
 //    public String payfinish(){
 //        ReceiptPrinter receiptPrinter=new ReceiptPrinter(totalAmount,orderList,orderNumber)
 //    }

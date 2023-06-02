@@ -4,14 +4,14 @@ import android.util.Log;
 
 public class CouponReader {
     Coupon coupon; //쿠폰
-    int totalAmount;//결제금액
+    int payAmount;//결제금액
     String msg;
-    public CouponReader(Coupon coupon, int totalAmount) {
+    public CouponReader(Coupon coupon, int payAmount) {
         this.coupon=coupon;
-        this.totalAmount=totalAmount;
+        this.payAmount=payAmount;
     }
 
-    boolean readCoupon(){
+    public boolean readCoupon(){
         boolean isCouponValid= validCoupon(this.coupon.getBarcode());
         boolean isCashLeft = cashLeft(this.coupon.getCouponMoney());
         if(!isCouponValid) {
@@ -19,7 +19,7 @@ public class CouponReader {
             return false;
         }
         if(!isCashLeft){
-            this.msg="쿠폰 잔액이 부족합니다.";
+            this.msg="쿠폰 잔액이 없습니다.";
             return false;
         }
         if(isCouponValid && isCashLeft){
@@ -38,9 +38,10 @@ public class CouponReader {
         }
         else return true;
     }
-    boolean cashLeft(int couponMoney){ //쿠폰금액이 주문 금액보다 작거나 같은지 확인. 쿠폰 금액이 더 클 경우 사용불가
-        if(this.totalAmount<=couponMoney){
+    boolean cashLeft(int couponMoney){
+        if(couponMoney>=payAmount) {
             return true;
+
         }else{
             return false;
         }
@@ -48,7 +49,7 @@ public class CouponReader {
 
     void payment(Coupon coupon){ //쿠폰 사용
         int couponMoney=coupon.getCouponMoney();
-        coupon.setCouponMoney(couponMoney-totalAmount);
+        coupon.setCouponMoney(couponMoney-payAmount);
     }
     public String getMsg() {
         return msg;

@@ -21,11 +21,16 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     private Context context;
     private ArrayList<Order> orderList;
     private MainActivity mainActivity;
+    // OrderViewModel 인스턴스 변수 선언
+    private OrderViewModel orderViewModel;
 
     public OrderAdapter(Context context, ArrayList<Order> orderList, MainActivity mainActivity) {
         this.context = context;
         this.orderList = orderList;
         this.mainActivity = mainActivity;
+    }
+    public void setOrderViewModel(OrderViewModel orderViewModel) {
+        this.orderViewModel = orderViewModel;
     }
 
     @NonNull
@@ -47,7 +52,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             @Override
             public void onClick(View view) {
                 // 주문 취소 버튼 클릭 시 해당 주문을 삭제합니다.
-                mainActivity.removeOrder(order);
+                orderViewModel.removeOrder(order);
             }
         });
     }

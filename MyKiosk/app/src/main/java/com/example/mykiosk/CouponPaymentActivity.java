@@ -5,7 +5,9 @@ package com.example.mykiosk;
         import android.util.Log;
         import android.view.View;
         import android.widget.Button;
+        import android.widget.EditText;
         import android.widget.TextView;
+        import android.widget.Toast;
 
         import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,7 +20,7 @@ package com.example.mykiosk;
 public class CouponPaymentActivity extends AppCompatActivity {
     Button inputCouponBtn;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coupon_payment);
 
@@ -35,22 +37,44 @@ public class CouponPaymentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Coupon coupon = new Coupon(12345678, 30000);
-                Payment couponPay = new Payment(coupon, totalPrice, isTakeout);
+                Payment payment = new Payment(coupon, totalPrice, isTakeout);
 
-                boolean isPay = couponPay.pay(); //쿠폰 결제
+                // 결제할 금액을 사용자에게 입력받는 코드 추가
+                EditText paymentAmountEditText = findViewById(R.id.payment_amount_edittext);
+                String paymentAmountString = paymentAmountEditText.getText().toString();
+
+                // 입력받은 결제금액을 정수로 변환하여 couponPay.pay() 메소드의 매개변수로 전달
+                int paymentAmount = Integer.parseInt(paymentAmountString);
+
+
+                boolean isPay = payment.pay(paymentAmount); //쿠폰 결제
 
                 TextView paymentResultText = findViewById(R.id.payment_result_text);
                 if (isPay) {
-                    paymentResultText.setText(couponPay.displayPrompt());
-                    Intent intent= new Intent(CouponPaymentActivity.this,OrderFinishActivity.class);
-                    intent.putExtra("orderNumber",Payment.orderNumber);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("orderList", orderList);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
+                    if(payment.getTotalAmount()>0){
+                        Intent intent= new Intent(CouponPaymentActivity.this,CardPaymentActivity.class);
+                        intent.putExtra("orderNumber",Payment.orderNumber);
+                        intent.putExtra("totalPrice",payment.getTotalAmount());
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("orderList", orderList);
+                        intent.putExtras(bundle);
+                        Toast.makeText(getApplicationContext(), "쿠폰 결제 완료\n 남은 잔액:"+String.valueOf(payment.getTotalAmount())+"은 카드결제로 진행합니다.", Toast.LENGTH_SHORT).show();
+                        startActivity(intent);
+                        finish();
+                    }
+                    else{
+                        paymentResultText.setText(payment.displayPrompt());
+                        Intent intent= new Intent(CouponPaymentActivity.this,OrderFinishActivity.class);
+                        intent.putExtra("orderNumber",Payment.orderNumber);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("orderList", orderList);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+
 
                 } else {
-                    paymentResultText.setText(couponPay.displayPrompt());
+                    paymentResultText.setText(payment.displayPrompt());
                 }
             }
         });
