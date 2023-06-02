@@ -42,7 +42,7 @@ public class CardPaymentActivity extends AppCompatActivity {
 
                 TextView paymentResultText = findViewById(R.id.payment_result_text);
                 if (isPay) {
-                    paymentResultText.setText(payment.displayPrompt());
+                    paymentResultText.setText(payment.getPaymentResultMsg());
                     Intent intent= new Intent(CardPaymentActivity.this,OrderFinishActivity.class);
                     intent.putExtra("orderNumber",Payment.orderNumber);
                     Bundle bundle = new Bundle();
@@ -51,7 +51,7 @@ public class CardPaymentActivity extends AppCompatActivity {
                     startActivity(intent);
 
                 } else {
-                    paymentResultText.setText(payment.displayPrompt());
+                    paymentResultText.setText(payment.getPaymentResultMsg());
                 }
             }
         });

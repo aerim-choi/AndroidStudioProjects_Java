@@ -19,7 +19,7 @@ public class CouponReader {
             return false;
         }
         if(!isCashLeft){
-            this.msg="쿠폰 잔액이 없습니다.";
+            this.msg="이미 사용한 쿠폰입니다.";
             return false;
         }
         if(isCouponValid && isCashLeft){
@@ -39,7 +39,7 @@ public class CouponReader {
         else return true;
     }
     boolean cashLeft(int couponMoney){
-        if(couponMoney>=payAmount) {
+        if(couponMoney!=0){
             return true;
 
         }else{

@@ -12,7 +12,7 @@ public class Payment {
     String paymentType;
     int totalAmount;
     boolean isTakeout;
-    String msg;
+    String paymentResultMsg;
 
     public Payment(Coupon coupon, int totalAmount, boolean isTakeout) {
         this.orderNumber++;
@@ -41,7 +41,7 @@ public class Payment {
             if(isPay) {
                 this.totalAmount = totalAmount - payAmount;
             }
-            this.msg=couponReader.getMsg();
+            this.paymentResultMsg=couponReader.getMsg();
             return isPay;
         }else{ //카드 결제
             Log.d("paymentType", this.paymentType);
@@ -50,12 +50,12 @@ public class Payment {
             if(isPay){
                 this.totalAmount=totalAmount-payAmount;
             }
-            this.msg=cardReader.getMsg();
+            this.paymentResultMsg=cardReader.getMsg();
             return isPay;
         }
     }
-    public String displayPrompt(){
-        return this.msg;
+    public String getPaymentResultMsg(){
+        return this.paymentResultMsg;
     }
 
     public int getTotalAmount() {

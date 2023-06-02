@@ -63,7 +63,7 @@ public class CouponPaymentActivity extends AppCompatActivity {
                         finish();
                     }
                     else{
-                        paymentResultText.setText(payment.displayPrompt());
+                        paymentResultText.setText(payment.getPaymentResultMsg());
                         Intent intent= new Intent(CouponPaymentActivity.this,OrderFinishActivity.class);
                         intent.putExtra("orderNumber",Payment.orderNumber);
                         Bundle bundle = new Bundle();
@@ -74,7 +74,7 @@ public class CouponPaymentActivity extends AppCompatActivity {
 
 
                 } else {
-                    paymentResultText.setText(payment.displayPrompt());
+                    paymentResultText.setText(payment.getPaymentResultMsg());
                 }
             }
         });
