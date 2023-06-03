@@ -20,7 +20,14 @@ public class OrderViewModel extends ViewModel {
     public LiveData<ArrayList<Order>> getOrderList() {
         return orderListLiveData;
     }
-
+    public int getOrderListSize() {
+        List<Order> orderList = orderListLiveData.getValue();
+        if (orderList != null) {
+            return orderList.size();
+        } else {
+            return 0;
+        }
+    }
     public void addOrder(Order order) {
         ArrayList<Order> currentOrders = orderListLiveData.getValue();
         currentOrders.add(order);

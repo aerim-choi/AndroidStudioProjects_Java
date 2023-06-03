@@ -11,6 +11,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -80,7 +81,10 @@ public class MainActivity extends AppCompatActivity {
 
         //카드 결제 버튼
         orderPayCardBtn.setOnClickListener(v -> {
-            if (orderViewModel.getOrderList().getValue().isEmpty()) {
+            int orderListSize = orderViewModel.getOrderListSize();
+            Log.d("orderListSize",String.valueOf(orderListSize));
+            if (orderListSize == 0) {
+                Log.d("orderListSize","메뉴를 선택해주세요");
                 Toast.makeText(this, "메뉴를 선택해주세요", Toast.LENGTH_SHORT).show();
             } else {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -115,7 +119,10 @@ public class MainActivity extends AppCompatActivity {
 
         //쿠폰 결제 버튼
         orderPayCouponBtn.setOnClickListener(v -> {
-            if (orderViewModel.getOrderList().getValue().isEmpty()) {
+            int orderListSize = orderViewModel.getOrderListSize();
+            Log.d("orderListSize",String.valueOf(orderListSize));
+            if (orderListSize == 0) {
+                Log.d("orderListSize","메뉴를 선택해주세요");
                 Toast.makeText(this, "메뉴를 선택해주세요", Toast.LENGTH_SHORT).show();
             } else {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
