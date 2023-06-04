@@ -24,3 +24,4 @@ public class Burger implements Menu{
         return price;
     }
 }
+

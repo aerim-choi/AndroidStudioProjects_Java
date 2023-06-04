@@ -6,3 +6,4 @@ public interface Menu {
     int getMenuImage();
     String getMenuPrice();
 }
+

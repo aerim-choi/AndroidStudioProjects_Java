@@ -17,16 +17,13 @@ public class CouponReader {
         if(!isCouponValid) {
             this.msg="유효하지 않은 쿠폰입니다.";
             return false;
-        }
-        if(!isCashLeft){
+        }if(!isCashLeft){
             this.msg="이미 사용한 쿠폰입니다.";
             return false;
-        }
-        if(isCouponValid && isCashLeft){
+        }if(isCouponValid && isCashLeft){
             payment(this.coupon);
             this.msg="결제 완료";
             return true;
-
         }
         this.msg="쿠폰 리더기 오류";
         return false;
@@ -35,18 +32,15 @@ public class CouponReader {
     boolean validCoupon(int barcode){//바코드 읽기
         if(barcode==0){  //바코드 읽기 실패
             return false;
-        }
-        else return true;
+        } else return true;
     }
     boolean cashLeft(int couponMoney){
         if(couponMoney!=0){
             return true;
-
         }else{
             return false;
         }
     }
-
     void payment(Coupon coupon){ //쿠폰 사용
         int couponMoney=coupon.getCouponMoney();
         coupon.setCouponMoney(couponMoney-payAmount);

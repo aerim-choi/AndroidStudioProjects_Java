@@ -61,8 +61,6 @@ public class Payment {
     public int getTotalAmount() {
         return totalAmount;
     }
-//    public String payfinish(){
-//        ReceiptPrinter receiptPrinter=new ReceiptPrinter(totalAmount,orderList,orderNumber)
-//    }
+
 }
 
